@@ -23,7 +23,7 @@ void add_history(char *nothing) {}
 #include <editline/readline.h>
 #endif
 
-typedef struct 
+typedef struct lval 
 {
 	int type;
 	long num;
@@ -155,6 +155,34 @@ lval *lval_read(mpc_ast_t *t)
 
 	return x;
 }
+
+/*lval *lval_eval_sexpr(lval *v)
+{
+	for (int = 0; i < v->count; i++)
+	{
+		v->cell[i] = lval_eval(v->cell[i]);
+	}
+
+	for (int i = 0; i < v->count; i++)
+	{
+		if (v->cell[i]->type == LVAL_ERR) { return lval_take(v, i); }
+	}
+
+	if (v->count == 0) { return v; }
+
+	if (v->count == 1) {return lval_take(v, 0); }
+
+	lval *f = lval_pop(v, 0);
+	if (f->type != LVAL_SYM)
+	{
+		lval_def(f); lval_del(v);
+		return lval_err("S-expression does not start with symbol!");
+	}
+
+	lval *result = builtin_op(v, f->sym);
+	lval_del(f);
+	return result;
+}*/
 
 int main(int argc, char **argv)
 {
